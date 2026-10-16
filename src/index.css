@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Semantic tokens: one set per theme, so components never need dark: variants. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --raised: #f1f2f5; --line: #e2e4ea;
+  --fg: #0f1115; --muted: #5b6171; --faint: #8b91a0;
+  --accent: #4f46e5; --accent-fg: #4338ca;
+  --mint: #059669; --mint-fg: #047857;
+  --amber: #d97706; --amber-fg: #b45309;
+  --rose: #e11d48; --rose-fg: #be123c;
+  color-scheme: light;
+}
+.dark {
+  --bg: #0b0c0f; --surface: #111318; --raised: #181b22; --line: #262a33;
+  --fg: #eceef3; --muted: #9096a6; --faint: #5f6575;
+  --accent: #6366f1; --accent-fg: #a5b4fc;
+  --mint: #10b981; --mint-fg: #6ee7b7;
+  --amber: #f59e0b; --amber-fg: #fcd34d;
+  --rose: #f43f5e; --rose-fg: #fda4af;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-mint: var(--mint);
+  --color-mint-fg: var(--mint-fg);
+  --color-amber: var(--amber);
+  --color-amber-fg: var(--amber-fg);
+  --color-rose: var(--rose);
+  --color-rose-fg: var(--rose-fg);
+  --animate-pop: pop 0.18s ease-out;
+  --animate-fade: fade 0.18s ease-out;
+  --animate-drawer: drawer 0.22s ease-out;
+  --animate-rise: rise 0.24s ease-out;
+  @keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes drawer { from { transform: translateX(-100%); } to { transform: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+html, body, #root { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
+* { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+
+/* Rich question text */
+.rich sup { font-size: 0.72em; line-height: 0; position: relative; top: -0.42em; }
+.rich sub { font-size: 0.72em; line-height: 0; position: relative; top: 0.25em; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.15em; font-size: 0.9em; line-height: 1.15; }
+.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.2em 0.05em; }
+.frac > span:last-child { padding: 0.05em 0.2em 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
